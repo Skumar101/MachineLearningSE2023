@@ -1,0 +1,99 @@
+!git clone https://github.com/Skumar101/MachineLearningSE2023
+from sklearn.neural_network import MLPClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn import model_selection
+from sklearn.metrics import accuracy_score
+from collections import Counter
+import tensorflow.keras as keras
+from keras.models import Sequential
+from keras.layers import Dense, Conv2D, InputLayer
+from keras.layers import Activation, MaxPooling2D, Dropout, Flatten, Reshape
+from keras.utils.np_utils import to_categorical 
+from keras.wrappers.scikit_learn import KerasClassifier
+from sklearn.model_selection import StratifiedKFold
+from sklearn.model_selection import cross_val_score
+from PIL import Image
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+def CNNClassifier(num_epochs=2, layers=1, dropout=0.15):
+  def create_model():
+    model = Sequential()
+    model.add(Reshape((64, 64, 3)))
+    
+    for i in range(layers):
+      model.add(Conv2D(64, (3, 3), padding='same'))
+      model.add(Activation('relu'))
+    
+    model.add(Conv2D(64, (3, 3)))
+    model.add(Activation('relu'))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
+    model.add(Dropout(dropout))
+
+    model.add(Conv2D(64, (3, 3), padding='same'))
+    model.add(Activation('relu'))
+    model.add(Conv2D(64, (3, 3)))
+    model.add(Activation('relu'))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
+    model.add(Dropout(dropout))
+
+    model.add(Flatten())
+    model.add(Dense(512))
+    model.add(Activation('relu'))
+    model.add(Dropout(dropout))
+    model.add(Dense(2))
+    model.add(Activation('softmax'))
+
+    # initiate RMSprop optimizer
+    opt = keras.optimizers.legacy.RMSprop(learning_rate=0.0001, decay=1e-6)
+
+    # Let's train the model using RMSprop
+    model.compile(loss='categorical_crossentropy',
+                  optimizer=opt,
+                  metrics=['accuracy'])
+    return model
+  return KerasClassifier(build_fn=create_model, epochs=num_epochs, batch_size=10, verbose=2)
+
+array1 = []
+array2 = []
+import os
+dir = '/content/MachineLearningSE2023/MLdatasetImages/GooseFromADistance/'
+os.chdir(dir)
+for files in os.listdir('/content/MachineLearningSE2023/MLdatasetImages/GooseFromADistance'):
+  if files != '.ipynb_checkpoints':
+    if files != 'cifar_data':
+      if files != 'MachineLearningSE2023':
+        files = dir + files
+        img = Image.open(files)
+        img = img.resize((64, 64), Image.ANTIALIAS)
+        numpydata = np.array(img)
+        b = np.reshape(numpydata, (1,np.product(numpydata.shape)))[0]
+        array1.append(b)
+        array2.append('goose')
+dir = '/content/MachineLearningSE2023/MLdatasetImages/GrassField/'
+os.chdir(dir)
+for files in os.listdir('/content/MachineLearningSE2023/MLdatasetImages/GrassField'):
+  if files != '.ipynb_checkpoints':
+    if files != 'cifar_data':
+      if files != 'MachineLearningSE2023':
+        files = dir + files
+        img = Image.open(files)
+        img = img.resize((64, 64), Image.ANTIALIAS)
+        numpydata = np.array(img)
+        b = np.reshape(numpydata, (1,np.product(numpydata.shape)))[0]
+        array1.append(b)
+        array2.append('empty')
+
+data_raw = np.array(array1)
+labels_raw = np.array(array2)
+
+data = data_raw.astype(float)
+labels = categorical_to_numpy(labels_raw)
+inputs_train, inputs_test, labels_train, labels_test = model_selection.train_test_split(data, labels, test_size=0.2, random_state=1)
+
+cnn = CNNClassifier(100, 4, 0.5)
+cnn.fit(inputs_train, labels_train)
+preds = cnn.predict(inputs_test)
+print (cnn.score(inputs_test, labels_test))
