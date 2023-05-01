@@ -1,0 +1,26 @@
+<annotation>
+	<folder>GooseFromADistance</folder>
+	<filename>goose1.jpeg</filename>
+	<path>C:\Users\16309\Desktop\MachineLearningSE2023-main\MLdatasetImages\GooseFromADistance\goose1.jpeg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>275</width>
+		<height>183</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>goose</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>93</xmin>
+			<ymin>21</ymin>
+			<xmax>220</xmax>
+			<ymax>172</ymax>
+		</bndbox>
+	</object>
+</annotation>

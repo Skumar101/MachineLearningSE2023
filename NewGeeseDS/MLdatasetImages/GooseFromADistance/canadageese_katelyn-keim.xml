@@ -1,0 +1,26 @@
+<annotation>
+	<folder>GooseFromADistance</folder>
+	<filename>canadageese_katelyn-keim.jpg</filename>
+	<path>C:\Users\16309\Desktop\MachineLearningSE2023-main\MLdatasetImages\GooseFromADistance\canadageese_katelyn-keim.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>1200</width>
+		<height>836</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>goose</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>516</xmin>
+			<ymin>236</ymin>
+			<xmax>878</xmax>
+			<ymax>638</ymax>
+		</bndbox>
+	</object>
+</annotation>

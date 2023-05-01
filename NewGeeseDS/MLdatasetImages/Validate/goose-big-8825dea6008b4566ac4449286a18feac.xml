@@ -1,0 +1,26 @@
+<annotation>
+	<folder>Validate</folder>
+	<filename>goose-big-8825dea6008b4566ac4449286a18feac.jpg</filename>
+	<path>C:\Users\16309\Desktop\MachineLearningSE2023-main\MLdatasetImages\Validate\goose-big-8825dea6008b4566ac4449286a18feac.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>1500</width>
+		<height>1000</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>goose</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>435</xmin>
+			<ymin>90</ymin>
+			<xmax>1205</xmax>
+			<ymax>915</ymax>
+		</bndbox>
+	</object>
+</annotation>
